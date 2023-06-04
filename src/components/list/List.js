@@ -3,6 +3,8 @@ import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux/es";
 import { useNavigate } from "react-router-dom";
 import { updateData } from "store/LocalStorage";
+import "./list.scss";
+import Button from "components/button/Button";
 
 const List = () => {
   const navigate = useNavigate();
@@ -17,38 +19,24 @@ const List = () => {
     localStorage.setItem("urlList", JSON.stringify(storedArray));
   };
 
-  const apiKey = "jnT6hAtYeq9bTWtP";
-  const url = "https://example.com";
-  const apiUrl = `https://web.archive.org/cdx/search/cdx?url=${encodeURIComponent(
-    url
-  )}&fl=timestamp&filter=statuscode:200&output=json&sort=desc&limit=1`;
-
-  fetch(apiUrl, {
-    headers: {
-      Accept: "application/json",
-      "Access-Control-Allow-Origin": "*",
-      Authorization: `LOW ${apiKey}`,
-    },
-  })
-    .then((response) => response.json())
-    .then((data) => {
-      // API 응답 처리
-      console.log("dd", data);
-    })
-    .catch((error) => {
-      // 오류 처리
-    });
+  const urlTypeChk = () => {
+    if (typeof data === "string") {
+      return JSON.parse(data);
+    }
+    if (typeof data === "object") {
+      return data && typeof data === "string" ? JSON.parse(data) : data;
+    }
+  };
 
   return (
-    <div>
-      리스트
+    <div className="list">
       <ul>
-        {typeof data === "string" ? (
-          <li>등록된 url이 없습니다.</li>
+        {urlTypeChk().length === 0 ? (
+          <li className="not-list">등록된 url이 없습니다.</li>
         ) : (
-          data.map((item, index) => (
+          urlTypeChk().map((item, index) => (
             <li key={index} onClick={() => navigate(`/${index}`)}>
-              {item} <button onClick={(e) => deleteUrl(e, index)}>삭제</button>
+              {item} <Button type="delete" onClick={(e) => deleteUrl(e, index)}>삭제</Button>
             </li>
           ))
         )}

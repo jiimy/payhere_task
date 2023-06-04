@@ -1,0 +1,14 @@
+.list {
+  margin-top: 20px;
+  ul {
+    margin-top: 20px;
+  }
+  li {
+    &:not(.not-list) {
+      &:hover {
+        background: #ccc;
+        cursor: pointer;
+      }
+    }
+  }
+}

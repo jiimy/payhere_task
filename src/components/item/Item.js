@@ -1,3 +1,4 @@
+import Button from "components/button/Button";
 import React, { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { updateData } from "store/LocalStorage";
@@ -20,24 +21,30 @@ const Item = () => {
 
   const handleClick = (e) => {
     e.preventDefault();
-
-    if (myArray.length >= 99) {
+    if (myArray.length >= 4) {
       alert("최대 4개까지 추가 가능합니다.");
       return;
     }
-
-    const updatedArray = [...myArray, inputValue];
-    setMyArray(updatedArray);
-    setInputValue("");
-    localStorage.setItem("urlList", JSON.stringify(updatedArray));
-    dispatch(updateData({ urlList: updatedArray }));
-    
+    if (inputValue.includes("http")) {
+      // 중복
+      if (!myArray.includes(inputValue)) {
+        const updatedArray = [...myArray, inputValue];
+        setMyArray(updatedArray);
+        setInputValue("");
+        localStorage.setItem("urlList", JSON.stringify(updatedArray));
+        dispatch(updateData({ urlList: updatedArray }));
+      } else {
+        alert("이미 있습니다.");
+      }
+    } else {
+      alert("정확한 도메인이름을 입력해주세요");
+    }
   };
 
   return (
     <form onSubmit={handleClick}>
       <input type="text" onChange={handleInputChange} value={inputValue} />
-      <button>추가</button>
+      <Button>추가</Button>
     </form>
   );
 };

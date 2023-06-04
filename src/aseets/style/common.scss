@@ -1,1 +1,15 @@
 @import './function.scss';
+
+.page {
+  max-width: 1200px;
+  margin: 0 auto;
+  margin-top: 40px;
+  @include media-mo {
+    padding: 0 20px;
+  }
+}
+
+input {
+  padding: 6px 10px 8px 10px;
+  border-radius: 10px;
+}

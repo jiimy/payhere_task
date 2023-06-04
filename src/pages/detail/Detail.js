@@ -1,11 +1,12 @@
-import React from 'react'
+import UrlList from "components/list/UrlList";
+import React from "react";
 
 const Detail = () => {
   return (
-    <div>
-      디테일페이지
+    <div className="detail-page page">
+      <UrlList />
     </div>
-  )
-}
+  );
+};
 
-export default Detail
+export default Detail;

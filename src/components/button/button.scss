@@ -1,0 +1,10 @@
+.btn {
+  margin-left: 10px;
+  padding: 4px 6px;
+  background: #e88383;
+  color: white;
+  border-radius: 4px;
+  &.is-delete {
+    background: black;
+  }
+}
