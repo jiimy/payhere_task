@@ -1,10 +1,9 @@
-import React, { useEffect, useState } from "react";
+import Button from "components/button/Button";
 import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux/es";
 import { useNavigate } from "react-router-dom";
 import { updateData } from "store/LocalStorage";
 import "./list.scss";
-import Button from "components/button/Button";
 
 const List = () => {
   const navigate = useNavigate();
